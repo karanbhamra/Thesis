@@ -1,0 +1,15 @@
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\StudentRecordTool.exe.config
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\StudentRecordTool.exe
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\StudentRecordTool.pdb
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.csprojAssemblyReference.cache
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.Properties.Resources.resources
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.csproj.GenerateResource.cache
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.exe
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.pdb
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.Form1.resources
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.CreateRecordForm.resources
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\Newtonsoft.Json.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\Newtonsoft.Json.pdb
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\Newtonsoft.Json.xml
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.csproj.CopyComplete
