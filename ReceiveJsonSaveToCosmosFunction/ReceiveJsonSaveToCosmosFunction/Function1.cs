@@ -27,14 +27,6 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             BasicStudent studentToAdd = JsonConvert.DeserializeObject<BasicStudent>(requestBody);
 
-            studentToAdd.MiddleName = "Danger";
-
-            //string name = req.Query["name"];
-
-            //string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            //dynamic data = JsonConvert.DeserializeObject(requestBody);
-            //name = name ?? data?.name;
-
             var json = JsonConvert.SerializeObject(studentToAdd, Formatting.Indented);
 
             var messageToReturn =  new HttpResponseMessage(HttpStatusCode.OK)
@@ -43,6 +35,15 @@ namespace ReceiveJsonSaveToCosmosFunction
             };
 
             var failureMessageToReturn = new HttpResponseMessage(HttpStatusCode.BadRequest);
+
+            CosmosConnector dbConnector = new CosmosConnector("https://localhost:8081", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
+
+            HttpStatusCode databaseCreatedSuccessfulyStatusCode = await dbConnector.CreateDataBase("StudentDatabase");
+
+            HttpStatusCode tableCreatedSuccessfullyStatusCode = await dbConnector.CreateTable(dbConnector.PreviousDatabaseName,"StudentRecords");
+
+            HttpStatusCode recordInsertedStatusCode = dbConnector.InsertStudentRecord(studentToAdd);
+
 
             return studentToAdd != null
                 ? messageToReturn
