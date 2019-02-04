@@ -44,16 +44,11 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             HttpStatusCode recordInsertedStatusCode = dbConnector.InsertStudentRecord(studentToAdd);
 
+            int totalStudents = await dbConnector.GetStudentRecordCount();
 
             return studentToAdd != null
                 ? messageToReturn
                 : failureMessageToReturn;
-            //return studentToAdd != null 
-            //    ? messageToReturn
-            //    : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
-            //return name != null
-            //    ? (ActionResult)new OkObjectResult($"Hello, {name}")
-            //    : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
         }
     }
 }

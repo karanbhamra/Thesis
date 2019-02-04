@@ -6,6 +6,7 @@ using Microsoft.Azure.Documents;
 using StudentRecordTool.Models;
 using System.Threading.Tasks;
 using System.Net;
+using System.Linq;
 
 namespace ReceiveJsonSaveToCosmosFunction
 {
@@ -34,9 +35,7 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             var statusCode = db.StatusCode;
 
-
             return statusCode;
-
         }
 
         public async Task<HttpStatusCode> CreateTable(string databaseName, string tableName)
@@ -54,32 +53,29 @@ namespace ReceiveJsonSaveToCosmosFunction
             var response = this.CreateStudentocumentIfNotExists(PreviousDatabaseName, PreviousTableName, student).GetAwaiter().GetResult();
 
             return response;
-
         }
-
 
         private async Task<HttpStatusCode> CreateStudentocumentIfNotExists(string databaseName, string collectionName, BasicStudent student)
         {
-            //try
-            //{
-            //    // third parameter is the id, using current time as placeholder
-            //    await this.client.ReadDocumentAsync(UriFactory.CreateDocumentUri(databaseName, collectionName, DateTime.Now.ToString()));
-            //}
-            //catch (DocumentClientException de)
-            //{
-            //    if (de.StatusCode == HttpStatusCode.NotFound)
-            //    {
             var response = await this.client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseName, collectionName), student);
 
             var statusCode = response.StatusCode;
 
             return statusCode;
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+
+        }
+
+        public async Task<int> GetStudentRecordCount()
+        {
+            string query = "SELECT c.id from c";
+
+            Task<int> getRecordCount = Task<int>.Factory.StartNew(() =>
+            {
+                return client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query).ToList().Count;
+            });
+
+            int count = await getRecordCount;
+            return count;
         }
 
 
