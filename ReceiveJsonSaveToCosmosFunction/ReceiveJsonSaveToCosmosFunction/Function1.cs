@@ -27,9 +27,10 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             BasicStudent studentToAdd = JsonConvert.DeserializeObject<BasicStudent>(requestBody);
 
+            // When returning, lets return the full student so that it may be tested further
             var json = JsonConvert.SerializeObject(studentToAdd, Formatting.Indented);
 
-            var messageToReturn =  new HttpResponseMessage(HttpStatusCode.OK)
+            var successMessageToReturn =  new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
@@ -42,12 +43,29 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             HttpStatusCode tableCreatedSuccessfullyStatusCode = await dbConnector.CreateTable(dbConnector.PreviousDatabaseName,"StudentRecords");
 
-            HttpStatusCode recordInsertedStatusCode = dbConnector.InsertStudentRecord(studentToAdd);
+            //HttpStatusCode recordInsertedStatusCode = dbConnector.InsertStudentRecord(studentToAdd);
 
-            int totalStudents = await dbConnector.GetStudentRecordCount();
+            var lastRecord = await dbConnector.GetLastAddedStudentRecordByStudentId();
+
+            FullStudent fullStudent;
+            if (lastRecord.Count == 0)
+            {
+                // no record returned, add the genesis block
+
+                fullStudent = StudentMapper.Map(studentToAdd);
+
+                var genesisStudent = StudentMapper.GenesisNodeStudent();
+
+                ;
+
+            }
+
+            //var studentRecords = await dbConnector.GetStudentRecords();
+
+            //int totalStudents = await dbConnector.GetStudentRecordCount();
 
             return studentToAdd != null
-                ? messageToReturn
+                ? successMessageToReturn
                 : failureMessageToReturn;
         }
     }

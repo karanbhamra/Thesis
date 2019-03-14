@@ -6,7 +6,7 @@ namespace ReceiveJsonSaveToCosmosFunction
 {
     class FullStudent
     {
-        public int Id { get; set; }
+        public int RecordId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -26,9 +26,9 @@ namespace ReceiveJsonSaveToCosmosFunction
 
         public string Major { get; set; }
 
-        public int MyProperty { get; set; } // previous hash
+        public int PreviousRecordHash { get; set; } // previous hash
 
-        public int MyProperty2 { get; set; }    // current hash
+        public int CurrentNodeHash { get; set; }    // current hash
 
     }
 }

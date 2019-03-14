@@ -1,0 +1,11 @@
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\bin\Debug\netcoreapp2.2\SHA512HashGenerator.deps.json
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\bin\Debug\netcoreapp2.2\SHA512HashGenerator.runtimeconfig.json
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\bin\Debug\netcoreapp2.2\SHA512HashGenerator.runtimeconfig.dev.json
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\bin\Debug\netcoreapp2.2\SHA512HashGenerator.dll
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\bin\Debug\netcoreapp2.2\SHA512HashGenerator.pdb
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\obj\Debug\netcoreapp2.2\SHA512HashGenerator.csprojAssemblyReference.cache
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\obj\Debug\netcoreapp2.2\SHA512HashGenerator.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\obj\Debug\netcoreapp2.2\SHA512HashGenerator.AssemblyInfoInputs.cache
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\obj\Debug\netcoreapp2.2\SHA512HashGenerator.AssemblyInfo.cs
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\obj\Debug\netcoreapp2.2\SHA512HashGenerator.dll
+\\Mac\Home\Desktop\Thesis\SHA512HashGenerator\SHA512HashGenerator\obj\Debug\netcoreapp2.2\SHA512HashGenerator.pdb

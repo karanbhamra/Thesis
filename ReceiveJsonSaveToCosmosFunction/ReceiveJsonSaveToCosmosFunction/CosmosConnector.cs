@@ -65,17 +65,44 @@ namespace ReceiveJsonSaveToCosmosFunction
 
         }
 
-        public async Task<int> GetStudentRecordCount()
+        public async Task<List<dynamic>> GetLastAddedStudentRecordByStudentId()
         {
-            string query = "SELECT c.id from c";
-
-            Task<int> getRecordCount = Task<int>.Factory.StartNew(() =>
+            // Query should be with the student id
+            string query = "SELECT top 1 * from c order by c._StudentId";
+            Task<List<dynamic>> studentRecord = Task<List<dynamic>>.Factory.StartNew(() =>
             {
-                return client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query).ToList().Count;
+                var list = client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query).ToList();
+                return list;
             });
 
-            int count = await getRecordCount;
+            return await studentRecord;
+        }
+
+        public async Task<List<dynamic>> GetStudentRecords()
+        {
+            string query = "SELECT * from c order by c.RecordId";
+
+            Task<List<dynamic>> getRecords = Task<List<dynamic>>.Factory.StartNew(() =>
+            {
+                var list = client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query).ToList();
+                return list;
+            });
+
+            return await getRecords;
+
+           // int count = await getRecordCount;
+           // return count;
+        }
+
+        public async Task<int> GetStudentRecordCount()
+        {
+            var records =  await GetStudentRecords();
+
+            int count = records.Count;
+
             return count;
+
+
         }
 
 
