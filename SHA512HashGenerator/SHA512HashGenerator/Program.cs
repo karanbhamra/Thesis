@@ -7,9 +7,14 @@ namespace SHA512HashGenerator
     {
         static void Main(string[] args)
         {
-            string test = "a";
 
-            Console.WriteLine(Hash.GetHashString(test));
+            //Console.WriteLine(Hash.GetHashString(test));
+            //Console.WriteLine(Hash.GetRandomHashedSaltBytesAsString());
+            //Console.WriteLine(Hash.GetRandomHashedSaltBytes());
+
+            var result = Hash.GetRandomSaltWithHash();
+            Console.WriteLine(result[0]);
+            Console.WriteLine(result[1]);
 
             Console.ReadKey();
         }

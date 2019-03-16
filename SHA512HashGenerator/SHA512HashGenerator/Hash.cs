@@ -6,7 +6,7 @@ namespace SHA512HashGenerator
 {
     public static class Hash
     {
-        public static byte[] GetHash(byte[] input)
+        private static byte[] GetHashBytes(byte[] input)
         {
             using (var generator = new SHA512Managed())
             {
@@ -15,7 +15,7 @@ namespace SHA512HashGenerator
 
         }
 
-        public static string GetHashString(byte[] input)
+        public static string GetHashBytesAsString(byte[] input)
         {
             using (var generator = new SHA512Managed())
             {
@@ -36,7 +36,45 @@ namespace SHA512HashGenerator
         {
             byte[] byteInput = Encoding.UTF8.GetBytes(input);
 
-            return GetHashString(byteInput);
+            return GetHashBytesAsString(byteInput);
         }
+
+        private static byte[] GetBytesFromString(string input)
+        {
+            byte[] byteResult = Encoding.UTF8.GetBytes(input);
+
+            return byteResult;
+        }
+
+        private static string GetRandomSaltAsString()
+        {
+            string result = Guid.NewGuid().ToString();
+
+            return result;
+
+        }
+
+        private static string GetSaltHashedAsString(string randomSalt)
+        {
+            //string randomSalt = GetRandomSaltAsString();
+            byte[] randomSaltBytes = GetBytesFromString(randomSalt);
+
+            string result = GetHashString(randomSalt);
+
+            //string result = GetHashBytesAsString(randomSaltBytes);
+
+            return result;
+        }
+
+        public static string[] GetRandomSaltWithHash()
+        {
+            string salt = GetRandomSaltAsString();
+            string hashedSalt = GetSaltHashedAsString(salt);
+
+            return new string[] { salt, hashedSalt };
+
+        }
+
+
     }
 }
