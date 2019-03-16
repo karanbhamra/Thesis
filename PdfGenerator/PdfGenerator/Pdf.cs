@@ -63,6 +63,15 @@ namespace PdfGenerator
             return Converter.Convert(pdfDocument);
         }
 
+        public string SaveToBase64String()
+        {
+            byte[] input = SaveToByteArray();
+
+            string output = Convert.ToBase64String(input);
+
+            return output;
+        }
+
         public bool SaveToFile(string path)
         {
             byte[] fileBytes = SaveToByteArray();
