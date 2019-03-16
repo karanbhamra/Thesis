@@ -1,0 +1,11 @@
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/bin/Debug/netcoreapp2.2/PdfGenerator.deps.json
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/bin/Debug/netcoreapp2.2/PdfGenerator.runtimeconfig.json
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/bin/Debug/netcoreapp2.2/PdfGenerator.runtimeconfig.dev.json
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/bin/Debug/netcoreapp2.2/PdfGenerator.dll
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/bin/Debug/netcoreapp2.2/PdfGenerator.pdb
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/obj/Debug/netcoreapp2.2/PdfGenerator.csprojAssemblyReference.cache
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/obj/Debug/netcoreapp2.2/PdfGenerator.csproj.CoreCompileInputs.cache
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/obj/Debug/netcoreapp2.2/PdfGenerator.AssemblyInfoInputs.cache
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/obj/Debug/netcoreapp2.2/PdfGenerator.AssemblyInfo.cs
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/obj/Debug/netcoreapp2.2/PdfGenerator.dll
+/Users/karan/Desktop/Thesis/PdfGenerator/PdfGenerator/obj/Debug/netcoreapp2.2/PdfGenerator.pdb
