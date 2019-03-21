@@ -7,6 +7,7 @@ using StudentRecordTool.Models;
 using System.Threading.Tasks;
 using System.Net;
 using System.Linq;
+using ReceiveStudentNameAndSendEncodedPdfRecord;
 
 namespace ReceiveJsonSaveToCosmosFunction
 {
@@ -46,6 +47,16 @@ namespace ReceiveJsonSaveToCosmosFunction
             var statusCode = collectionResult.StatusCode;
 
             return statusCode;
+        }
+
+        internal void UseTableName(string tablename)
+        {
+            PreviousTableName = tablename;
+        }
+
+        internal void UseDataBase(string databasename)
+        {
+            PreviousDatabaseName = databasename;
         }
 
         public HttpStatusCode InsertStudentRecord(BasicStudent student)
@@ -120,6 +131,19 @@ namespace ReceiveJsonSaveToCosmosFunction
             return count;
 
 
+        }
+
+        public async Task<dynamic> GetFullStudentRecordFromName(Student student)
+        {
+            string query = $"SELECT * FROM c where c.FirstName='{student.FirstName}' and c.MiddleName='{student.MiddleName}' and c.LastName='{student.LastName}'";
+
+            Task<dynamic> studentRecord = Task<dynamic>.Factory.StartNew(() =>
+            {
+                var list = client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query).ToList();
+                return list[0];
+            });
+
+            return await studentRecord;
         }
 
 

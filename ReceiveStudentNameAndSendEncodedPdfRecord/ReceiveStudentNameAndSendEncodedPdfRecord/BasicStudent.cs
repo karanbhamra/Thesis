@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace StudentRecordTool.Models
 {
     [Serializable]
-    class BasicStudent
+    public class BasicStudent
     {
         public string FirstName { get; set; }
 
