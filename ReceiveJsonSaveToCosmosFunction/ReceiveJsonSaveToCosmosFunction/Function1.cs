@@ -11,6 +11,7 @@ using StudentRecordTool.Models;
 using System.Net.Http;
 using System.Net;
 using System.Text;
+using SHA512HashGenerator;
 
 namespace ReceiveJsonSaveToCosmosFunction
 {
@@ -51,11 +52,26 @@ namespace ReceiveJsonSaveToCosmosFunction
             if (lastRecord.Count == 0)
             {
                 // no record returned, add the genesis block
+                // generate previous node hash for genesis student
+                // generate genesis student hash, and salthash and combined hash
 
-                fullStudent = StudentMapper.Map(studentToAdd);
+                BasicStudent genesisStudent = StudentMapper.GenesisStudentNode();
 
-                var genesisStudent = StudentMapper.GenesisNodeStudent();
+                string hashForGenesisStudentPrevious = Hash.GetHashString("Test");
 
+                byte[] genesisStudentBytes = ObjectHasher.GetBytes(genesisStudent);
+
+                string genesisStudentHash = Hash.GetHashBytesAsString(genesisStudentBytes);
+                string[] saltAndSaltHashArray = Hash.GetRandomSaltWithHash();
+
+                string salt = saltAndSaltHashArray[0];
+                string saltHash = saltAndSaltHashArray[1];
+
+                string studentHashPlusSaltHash = Hash.GetHashString(genesisStudentHash + saltHash);
+
+                fullStudent = StudentMapper.Map(genesisStudent, hashForGenesisStudentPrevious, studentHashPlusSaltHash, salt);
+
+                HttpStatusCode recordInsertedStatusCode = dbConnector.InsertStudentRecord(fullStudent);
                 ;
 
             }

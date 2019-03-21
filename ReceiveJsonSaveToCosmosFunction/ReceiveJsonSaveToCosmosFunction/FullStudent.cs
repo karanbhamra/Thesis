@@ -26,9 +26,11 @@ namespace ReceiveJsonSaveToCosmosFunction
 
         public string Major { get; set; }
 
-        public int PreviousRecordHash { get; set; } // previous hash
+        public string PreviousRecordHash { get; set; } // previous hash
 
-        public int CurrentNodeHash { get; set; }    // current hash
+        public string CurrentNodeHash { get; set; }    // current hash will be the hash of current object + hash of salt 
+
+        public string Salt { get; set; }    // salt will be hashed and then added to current nodehash
 
     }
 }

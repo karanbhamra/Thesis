@@ -7,7 +7,7 @@ namespace ReceiveJsonSaveToCosmosFunction
 {
     class StudentMapper
     {
-        public static FullStudent Map(BasicStudent basicStudent, int id = 1)
+        public static FullStudent Map(BasicStudent basicStudent, string prevRecordHash, string currentNodeHash, string salt, int id = 1)
         {
             FullStudent fullStudent = new FullStudent
             {
@@ -20,7 +20,10 @@ namespace ReceiveJsonSaveToCosmosFunction
                 Degree = basicStudent.Degree,
                 Awarded = basicStudent.Awarded,
                 Major = basicStudent.Major,
-                RecordId = id
+                RecordId = id,
+                PreviousRecordHash = prevRecordHash,
+                CurrentNodeHash = currentNodeHash,
+                Salt = salt
             };
 
 
@@ -34,17 +37,17 @@ namespace ReceiveJsonSaveToCosmosFunction
             return fullStudent;
         }
 
-        public static BasicStudent GenesisNodeStudent()
+        public static BasicStudent GenesisStudentNode()
         {
             BasicStudent basicStudent = new BasicStudent
             {
-                FirstName = "Test",
-                MiddleName = "Test",
-                LastName = "Test",
+                FirstName = "Matty",
+                MiddleName = "the",
+                LastName = "Matador",
                 DateOfBirth = DateTime.UnixEpoch,
                 Organization = "California State University - Northridge",
                 SchoolDivision = "College of Eng/ Comp Sci",
-                Degree = "Bachelor of Science",
+                Degree = "Master of Science",
                 Awarded = DateTime.UnixEpoch,
                 Major = "Computer Science",
             };

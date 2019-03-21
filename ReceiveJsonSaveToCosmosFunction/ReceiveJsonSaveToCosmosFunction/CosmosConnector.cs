@@ -55,7 +55,24 @@ namespace ReceiveJsonSaveToCosmosFunction
             return response;
         }
 
+        public HttpStatusCode InsertStudentRecord(FullStudent student)
+        {
+            var response = this.CreateStudentocumentIfNotExists(PreviousDatabaseName, PreviousTableName, student).GetAwaiter().GetResult();
+
+            return response;
+        }
+
         private async Task<HttpStatusCode> CreateStudentocumentIfNotExists(string databaseName, string collectionName, BasicStudent student)
+        {
+            var response = await this.client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseName, collectionName), student);
+
+            var statusCode = response.StatusCode;
+
+            return statusCode;
+
+        }
+
+        private async Task<HttpStatusCode> CreateStudentocumentIfNotExists(string databaseName, string collectionName, FullStudent student)
         {
             var response = await this.client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseName, collectionName), student);
 
