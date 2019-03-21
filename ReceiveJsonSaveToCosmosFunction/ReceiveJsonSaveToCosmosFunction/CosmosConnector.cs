@@ -85,7 +85,7 @@ namespace ReceiveJsonSaveToCosmosFunction
         public async Task<List<dynamic>> GetLastAddedStudentRecordByStudentId()
         {
             // Query should be with the student id
-            string query = "SELECT top 1 * from c order by c._StudentId";
+            string query = "SELECT top 1 * from c order by c.RecordId desc";
             Task<List<dynamic>> studentRecord = Task<List<dynamic>>.Factory.StartNew(() =>
             {
                 var list = client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query).ToList();
