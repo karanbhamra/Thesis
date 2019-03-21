@@ -18,7 +18,7 @@ namespace ReceiveJsonSaveToCosmosFunction
 {
     public static class Function1
     {
-        [FunctionName("Function1")]
+        [FunctionName("SaveStudent")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
