@@ -1,0 +1,16 @@
+{
+  "name": "frontend_website",
+  "version": "1.0.0",
+  "description": "The main website where user can search for student records.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Karandeep Bhamra",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
