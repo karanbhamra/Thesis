@@ -11,7 +11,7 @@ using ReceiveStudentNameAndSendEncodedPdfRecord;
 
 namespace ReceiveJsonSaveToCosmosFunction
 {
-    class CosmosConnector
+    class CosmosConnector : IDisposable
     {
         public string Uri { get; set; }
         public string AccessKey { get; set; }
@@ -133,19 +133,35 @@ namespace ReceiveJsonSaveToCosmosFunction
 
         }
 
-        public async Task<dynamic> GetFullStudentRecordFromName(Student student)
+        //public async Task<dynamic> GetFullStudentRecordFromName(Student student)
+        //{
+        //    string query = $"SELECT * FROM c where c.FirstName='{student.FirstName}' and c.MiddleName='{student.MiddleName}' and c.LastName='{student.LastName}'";
+
+        //    Task<dynamic> studentRecord = Task<dynamic>.Factory.StartNew(() =>
+        //    {
+        //        var list = client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query).ToList();
+        //        return list[0];
+        //    });
+
+        //    return await studentRecord;
+        //}
+
+        public dynamic GetFullStudentRecordFromName(Student student)
         {
             string query = $"SELECT * FROM c where c.FirstName='{student.FirstName}' and c.MiddleName='{student.MiddleName}' and c.LastName='{student.LastName}'";
 
-            Task<dynamic> studentRecord = Task<dynamic>.Factory.StartNew(() =>
-            {
-                var list = client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query).ToList();
-                return list[0];
-            });
+            dynamic document = client.CreateDocumentQuery<dynamic>(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName),
+    query).AsEnumerable().FirstOrDefault();
 
-            return await studentRecord;
+            return document;
         }
 
-
+        public void Dispose()
+        {
+            if (client != null)
+            {
+                client.Dispose();
+            }
+        }
     }
 }

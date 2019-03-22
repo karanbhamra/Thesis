@@ -18,19 +18,20 @@ namespace PdfGenerator
 
         private string htmlData;
         
-        public Pdf(string title, string data)
+        public Pdf(string title, string data, IConverter converter)
         {
-            Title = title;  
-            Converter = new SynchronizedConverter(new PdfTools());
+            Title = title;
+            Converter = converter;
+            //Converter = new SynchronizedConverter(new PdfTools());
             htmlData = data;
             setDocumentSettings();
             
         }
 
-        public Pdf(BasicStudent student)
+        public Pdf(BasicStudent student, IConverter converter)
         {
             Title = $"{student.FirstName} {student.MiddleName} {student.LastName} Academic Records";
-            Converter = new SynchronizedConverter(new PdfTools());
+            Converter = converter;
             htmlData = TemplateGenerator.GetHTMLString(student);
 
             setDocumentSettings();
