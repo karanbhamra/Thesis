@@ -10,13 +10,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (request, response) => {
-    response.send('Welcome to the main website.');
+    response.sendFile(path.join(__dirname, 'public', 'index.html'));
+
+});
+
+app.post('/submit', (request, response) => {
+    response.send(`Your file will be here for`);
 
 });
 
 app.get('*', (request, response) => {
-    response.send('Not found');
+    response.sendFile(path.join(__dirname, 'public', '404.html'));
+
 });
+
+app.post('*', (request, response) => {
+    response.sendFile(path.join(__dirname, 'public', '404.html'));
+
+});
+
 
 
 app.listen(PORT, () => {
