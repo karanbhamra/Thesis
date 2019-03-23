@@ -22,7 +22,6 @@ namespace PdfGenerator
         {
             Title = title;
             Converter = converter;
-            //Converter = new SynchronizedConverter(new PdfTools());
             htmlData = data;
             setDocumentSettings();
             
@@ -52,11 +51,11 @@ namespace PdfGenerator
             objectSettings = new ObjectSettings()
             {
                 PagesCount = true,
-                HtmlContent = htmlData,//TemplateGenerator.GetHTMLString(),    // HTML String Goes here for the data
+                HtmlContent = htmlData,    // HTML String Goes here for the data
                 // PDF stylesheet is saved into PdfGenerator/assets/styles.css
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet =  Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
-                HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
-                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "CSUN Student Report" }
+                WebSettings = { DefaultEncoding = "utf-8" , EnableIntelligentShrinking = false },//, UserStyleSheet =  Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
+                HeaderSettings = { FontName = "Times New Roman", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 9, Line = true, Center = "CSUN DegreeVerify Certificate" }
 
             };
 
