@@ -1,3 +1,9 @@
+// Author: Karandeep Bhamra
+// Purpose: Project for CSUN Masters 2019
+// Description: Serves the front end website which provides the form where student info can be input and then submitted to api router which routes the form data
+//              after packaging it in a json object to azure function which retrives the full information and generates pdf and sends it back as a base64 encoded string.
+//              The base64 encoded string is then decoded back as a pdf object and then sent to the user where the pdf file is opened on screen. Also provides a 404 page for
+//              any invalid api endpoints.
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -45,6 +51,7 @@ app.post('/submit', (request, response) => {
             console.log('Body: ' + body);
             let mydata = JSON.parse(body);
             let baseString = mydata.Pdf;
+            console.log(mydata);
             var buf = Buffer.from(baseString, 'base64'); // Ta-da
 
             response.setHeader('Content-Type', 'application/pdf');
