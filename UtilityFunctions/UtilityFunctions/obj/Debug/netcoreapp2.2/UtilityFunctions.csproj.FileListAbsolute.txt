@@ -1,0 +1,11 @@
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/bin/Debug/netcoreapp2.2/UtilityFunctions.deps.json
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/bin/Debug/netcoreapp2.2/UtilityFunctions.runtimeconfig.json
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/bin/Debug/netcoreapp2.2/UtilityFunctions.runtimeconfig.dev.json
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/bin/Debug/netcoreapp2.2/UtilityFunctions.dll
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/bin/Debug/netcoreapp2.2/UtilityFunctions.pdb
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/obj/Debug/netcoreapp2.2/UtilityFunctions.csprojAssemblyReference.cache
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/obj/Debug/netcoreapp2.2/UtilityFunctions.csproj.CoreCompileInputs.cache
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/obj/Debug/netcoreapp2.2/UtilityFunctions.AssemblyInfoInputs.cache
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/obj/Debug/netcoreapp2.2/UtilityFunctions.AssemblyInfo.cs
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/obj/Debug/netcoreapp2.2/UtilityFunctions.dll
+/Users/karan/Desktop/Thesis/UtilityFunctions/UtilityFunctions/obj/Debug/netcoreapp2.2/UtilityFunctions.pdb
