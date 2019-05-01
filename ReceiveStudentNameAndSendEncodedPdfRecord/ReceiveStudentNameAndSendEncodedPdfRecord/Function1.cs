@@ -16,6 +16,8 @@ using System.Collections.Generic;
 using PdfGenerator;
 using DinkToPdf.Contracts;
 using DinkToPdf;
+using Microsoft.Extensions.Configuration;
+using UtilityFunctions;
 
 namespace ReceiveStudentNameAndSendEncodedPdfRecord
 {
@@ -28,27 +30,40 @@ namespace ReceiveStudentNameAndSendEncodedPdfRecord
         [FunctionName("GetPdf")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log, ExecutionContext context)
         {
             log.LogInformation($"C# HTTP trigger function processed request #{++count}.");
+
+            // load the connection string for the db
+            var config = new ConfigurationBuilder()
+                .SetBasePath(context.FunctionAppDirectory)
+                .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
+
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
 
             Student student = JsonConvert.DeserializeObject<Student>(requestBody);
+            student.FirstName = student.FirstName.CapitalizeEveryLetterOnSplit(' ');
+            student.MiddleName = student.MiddleName.CapitalizeEveryLetterOnSplit(' ');
+            student.LastName = student.LastName.CapitalizeEveryLetterOnSplit(' ');
+
 
             // search the cosmosdb for the record and then grab the record
             dynamic studentCosmosRecord;
-            using (CosmosConnector dbConnector = new CosmosConnector("https://localhost:8081", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw=="))
+
+            string uri = config.GetConnectionString("address");
+            string accessKey = config.GetConnectionString("accessKey");
+            using (CosmosConnector dbConnector = new CosmosConnector(uri, accessKey))
             {
                 dbConnector.UseDataBase("StudentDatabase");
                 dbConnector.UseTableName("StudentRecords");
                 studentCosmosRecord = dbConnector.GetFullStudentRecordFromName(student);
-
             }
 
             dynamic previousRecord = studentCosmosRecord;
-            
 
             var dict = (IDictionary<string, object>)previousRecord;
 
@@ -69,7 +84,7 @@ namespace ReceiveStudentNameAndSendEncodedPdfRecord
             // send the record data to the pdf template generator and generate pdf 
             Pdf studentPdf = new Pdf(basicStudent, converter);
             string pdfOutput = studentPdf.SaveToBase64String();
-            
+
             // send pdf back as response
 
             object dataToSendBack = new
