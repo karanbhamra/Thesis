@@ -1,9 +1,17 @@
+using System;
 using System.Text;
 
 namespace UtilityFunctions
 {
     static class UtilityFunctions
     {
+        public static bool IsLocalEnvironment()
+        {
+            bool isLocal = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WEBSITE_INSTANCE_ID"));
+
+            return isLocal;
+
+        }
         public static string CapitalizeEveryLetterOnSplit(this string str, char sep)
         {
             StringBuilder output = new StringBuilder();

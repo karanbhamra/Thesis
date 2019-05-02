@@ -18,7 +18,6 @@ using DinkToPdf.Contracts;
 using DinkToPdf;
 using Microsoft.Extensions.Configuration;
 using UtilityFunctions;
-using Microsoft.WindowsAzure;
 
 namespace ReceiveStudentNameAndSendEncodedPdfRecord
 {
@@ -35,7 +34,7 @@ namespace ReceiveStudentNameAndSendEncodedPdfRecord
         {
             log.LogInformation($"C# HTTP trigger function processed request #{++count}.");
 
-            bool isLocal = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WEBSITE_INSTANCE_ID"));
+            bool isLocal = UtilityFunctions.UtilityFunctions.IsLocalEnvironment();
 
             string response = isLocal ? "Function is running on local environment." : "Function is running on Azure.";
 
