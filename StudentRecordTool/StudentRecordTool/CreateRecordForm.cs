@@ -7,9 +7,11 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UtilityFunctions;
 
 namespace StudentRecordTool
 {
@@ -39,11 +41,17 @@ namespace StudentRecordTool
 
         private void generateRecord_Click(object sender, EventArgs e)
         {
+            if (firstName.Text.Length == 0 || middleName.Text.Length == 0 || lastName.Text.Length == 0)
+            {
+                MessageBox.Show("Enter the text in the missing fields please");
+                return;
+            }
+
             BasicStudent tempStudent = new BasicStudent()
             {
-                FirstName = firstName.Text,
-                MiddleName = middleName.Text,
-                LastName = lastName.Text,
+                FirstName = firstName.Text.CapitalizeEveryLetterOnSplit(' '),
+                MiddleName = middleName.Text.CapitalizeEveryLetterOnSplit(' '),
+                LastName = lastName.Text.CapitalizeEveryLetterOnSplit(' '),
                 DateOfBirth = dateOfBirthPicker.Value,
                 Organization = organization.Text,
                 SchoolDivision = schoolDivision.Text,
@@ -54,10 +62,13 @@ namespace StudentRecordTool
 
             // serialize JSON directly to a file
 
+            string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+
             string filename = $"{tempStudent.FirstName}{tempStudent.MiddleName}{tempStudent.LastName}.json";
 
            
-            using (StreamWriter file = File.CreateText($@"{filename}"))
+            using (StreamWriter file = File.CreateText($@"{directoryName}/{filename}"))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, tempStudent);

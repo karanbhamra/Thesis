@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace StudentRecordTool.Models
 {
+    [Serializable]
     class BasicStudent
     {
-        //public int Id { get; set; }
-
         public string FirstName { get; set; }
 
         public string MiddleName { get; set; }
