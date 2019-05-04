@@ -37,7 +37,8 @@ namespace StudentRecordTool
         private void verifyRecords_Click(object sender, EventArgs e)
         {
             // TODO: verify the records
-
+            VerifyRecordsForm verifyRecordsForm = new VerifyRecordsForm();
+            verifyRecordsForm.Show();
         }
 
         private void addRecords_Click(object sender, EventArgs e)

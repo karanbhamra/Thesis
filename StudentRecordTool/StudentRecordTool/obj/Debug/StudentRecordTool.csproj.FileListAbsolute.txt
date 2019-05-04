@@ -15,3 +15,17 @@
 \\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.csproj.CopyComplete
 \\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.ViewRecordForm.resources
 \\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\local.settings.json
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\Microsoft.Azure.Documents.ServiceInterop.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\Cosmos.CRTCompat.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\Microsoft.Azure.Documents.Client.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Buffers.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Memory.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Net.Http.WinHttpHandler.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Numerics.Vectors.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\Microsoft.Azure.Documents.Client.xml
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Buffers.xml
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Memory.xml
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Numerics.Vectors.xml
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.VerifyRecordsForm.resources
