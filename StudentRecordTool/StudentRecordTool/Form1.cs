@@ -36,7 +36,20 @@ namespace StudentRecordTool
 
             fileDialog.Filter = "JSON (*.json) | *.json";
             fileDialog.InitialDirectory = directoryName;
-            fileDialog.ShowDialog();
+            DialogResult result = fileDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string file = fileDialog.FileName;
+                ViewRecordForm viewRecordForm = new ViewRecordForm(file);
+                viewRecordForm.Show();
+            }
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // TODO: verify the records
 
         }
     }
