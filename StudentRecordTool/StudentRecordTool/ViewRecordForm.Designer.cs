@@ -46,6 +46,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.addRecordButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dateAwarded
@@ -192,11 +193,22 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "First Name";
             // 
+            // addRecordButton
+            // 
+            this.addRecordButton.Location = new System.Drawing.Point(301, 811);
+            this.addRecordButton.Name = "addRecordButton";
+            this.addRecordButton.Size = new System.Drawing.Size(159, 57);
+            this.addRecordButton.TabIndex = 39;
+            this.addRecordButton.Text = "Add";
+            this.addRecordButton.UseVisualStyleBackColor = true;
+            this.addRecordButton.Visible = false;
+            // 
             // ViewRecordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 946);
+            this.Controls.Add(this.addRecordButton);
             this.Controls.Add(this.dateAwarded);
             this.Controls.Add(this.major);
             this.Controls.Add(this.degree);
@@ -243,5 +255,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button addRecordButton;
     }
 }

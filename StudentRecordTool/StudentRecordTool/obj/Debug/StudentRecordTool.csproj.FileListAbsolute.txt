@@ -14,3 +14,4 @@
 \\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\Newtonsoft.Json.xml
 \\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.csproj.CopyComplete
 \\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.ViewRecordForm.resources
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\local.settings.json

@@ -19,7 +19,7 @@ namespace StudentRecordTool
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void createRecord_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -28,7 +28,26 @@ namespace StudentRecordTool
             recordForm.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void viewRecord_Click(object sender, EventArgs e)
+        {
+            setupRecordForm("ViewRecordForm", false);
+
+        }
+
+        private void verifyRecords_Click(object sender, EventArgs e)
+        {
+            // TODO: verify the records
+
+        }
+
+        private void addRecords_Click(object sender, EventArgs e)
+        {
+            //// Add the generated json file to the collection in cosmosdb
+
+            setupRecordForm("AddRecordForm", true);
+        }
+
+        public void setupRecordForm(string formTitle, bool isAddForm)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
 
@@ -41,16 +60,9 @@ namespace StudentRecordTool
             if (result == DialogResult.OK)
             {
                 string file = fileDialog.FileName;
-                ViewRecordForm viewRecordForm = new ViewRecordForm(file);
+                ViewRecordForm viewRecordForm = new ViewRecordForm(file, formTitle, isAddForm);
                 viewRecordForm.Show();
             }
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            // TODO: verify the records
-
         }
     }
 }

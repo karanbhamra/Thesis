@@ -1,8 +1,16 @@
 using System;
+using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace UtilityFunctions
 {
+    public class JsonSettings
+    {
+        public string devUrl { get; set; }
+        public string liveUrl { get; set; }
+    }
+
     static class UtilityFunctions
     {
         public static bool IsLocalEnvironment()
@@ -38,6 +46,31 @@ namespace UtilityFunctions
             }
 
             return output.ToString();
+        }
+
+        public static string GetValueOfSetting(string setting)
+        {
+            // load the local.settings.json
+
+            using (StreamReader r = new StreamReader("local.settings.json"))
+            {
+                string json = r.ReadToEnd();
+
+                JsonSettings settings = JsonConvert.DeserializeObject<JsonSettings>(json);
+
+                if (setting == "liveUrl")
+                {
+                    return settings.liveUrl;
+                }
+                else if (setting == "devUrl")
+                {
+                    return settings.devUrl;
+                }
+                else
+                {
+                    return "";
+                }
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ TODO:
 - ~~Create the initial function which will take the submitted name from the client side and call the function which will retrieve the user record and respond back with the object containing the basic student info~~
 - ~~**Extra Work** generate a pdf server side and send back a base64 encoded string which can be used client side to download the pdf~~
 - **Extra Work**Create Azure API gateway endpoints which I can call instead of using the function http url
-- ~~Create the end user website and host it ~~
+- ~~Create the end user website and host it~~
     - ~~Display received pdf~~
 - Write unit tests
 - Finish the debug student tool used to test the flow/ something administration might use
