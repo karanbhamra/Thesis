@@ -24,81 +24,87 @@ namespace StudentRecordTool
         private async void startVerifyButton_Click(object sender, EventArgs e)
         {
             progressBar1.Value = 25;
-
             List<FullStudent> students = await GetAllFullStudents();
+            progressBar1.Value = 50;
 
             Console.WriteLine($"Total records: {students.Count}");
 
+            string student1 = "";
+            string student2 = "";
+
+ 
+            numOfRecords.Text = students.Count.ToString();
+
             // now that we have the fullstudent records, we can start the verfication of them all
             BasicStudent genesisStudent = StudentMapper.GenesisStudentNode();
-            //string previousHash = Hash.GetHashString("Test");   // start with the hash of previous which is C6EE9....
-
-            // This works, now lets try from reverse
-            //foreach (var currentStudent in students)
-            //{
-            //    bool matched = true;
-            //    if (currentStudent.PreviousRecordHash != previousHash)
-            //    {
-            //        matched = false;
-            //    }
-
-            //    if (!matched)
-            //    {
-            //        MessageBox.Show("Hash MisMatched!");
-            //        return;
-            //    }
-
-            //    previousHash = currentStudent.CurrentNodeHash;
-
-            //}
 
             bool valid = true;
             for (int i = students.Count -1 ; i >= 0; i--)
             {
+                bool currentHashMatch = true;
+                bool previousHashMatch = true;
+
                 FullStudent currentFullStudent = students[i];
 
-                // think about how to deal with previous hash now that the current hash has been verified
-
-                if (i ==0)
-                {
-                    string previousGenesisHash = Hash.GetHashString("Test");
-
-
-                }
-
+                Console.WriteLine($"Current Student: {currentFullStudent.FirstName}");
                 string recalculatedCurrentNodeHash = CalculateCurrentFullStudentHash(currentFullStudent);
 
                 if (recalculatedCurrentNodeHash != currentFullStudent.CurrentNodeHash)
                 {
-                    valid = false;
+                    currentHashMatch = false;
                 }
 
-                ; 
+                if (i == 0)
+                {
+                    Console.WriteLine($"Genesis Node Previous: Test");
+                    string previousGenesisHash = Hash.GetHashString("Test");
+
+                    if (currentFullStudent.PreviousRecordHash != previousGenesisHash)
+                    {
+                        previousHashMatch = false;
+                    }
+
+                }
+                else
+                {
+
+                    FullStudent previousFullStudent = students[i - 1];
+                    Console.WriteLine($"Previous Student: {previousFullStudent.FirstName}");
+                    string recalculatedPreviousNodeHash = CalculateCurrentFullStudentHash(previousFullStudent);
+
+                    if (currentFullStudent.PreviousRecordHash != recalculatedPreviousNodeHash)
+                    {
+                        previousHashMatch = false;
+                        student2 = previousFullStudent.FirstName;
+                    }
+                }
+
+                if (!currentHashMatch || !previousHashMatch)
+                {
+                    valid = false;
+                    student1 = currentFullStudent.FirstName;
+                    break;
+                }
 
             }
+            progressBar1.Value = 100;
 
             if (valid)
             {
 
-                MessageBox.Show("Hash Verified and Unmodified");
+                MessageBox.Show("Hash Verified and Unmodified", "Success");
             }
             else
             {
-                MessageBox.Show("Hash mismatch.");
+                MessageBox.Show($"Hash mismatch on {student1} and {student2}", "Error");
 
             }
-
-
-
 
         }
 
         string CalculateCurrentFullStudentHash(FullStudent currentFullStudent)
         {
             BasicStudent currentBasicStudent = StudentMapper.FullStudentToBasicStudent(currentFullStudent);
-
-            //var currentBasicBytes = ObjectHasher.GetBytes(currentBasicStudent);
-            //var currentBasicHash = Hash.GetHashBytesAsString(currentBasicBytes);
 
             string currentBasic = JsonConvert.SerializeObject(currentBasicStudent);
             string currentBasicHash = Hash.GetHashString(currentBasic);
