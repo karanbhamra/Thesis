@@ -13,6 +13,7 @@ using System.Net;
 using System.Text;
 using SHA512HashGenerator;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace ReceiveJsonSaveToCosmosFunction
 {
@@ -63,9 +64,12 @@ namespace ReceiveJsonSaveToCosmosFunction
 
                 string hashForGenesisStudentPrevious = Hash.GetHashString("Test");
 
-                byte[] genesisStudentBytes = ObjectHasher.GetBytes(genesisStudent);
+                string genesisStudentSerialized = JsonConvert.SerializeObject(genesisStudent);
+                string genesisStudentHash = Hash.GetHashString(genesisStudentSerialized);
 
-                string genesisStudentHash = Hash.GetHashBytesAsString(genesisStudentBytes);
+                //byte[] genesisStudentBytes = ObjectHasher.GetBytes(genesisStudent);
+
+                //string genesisStudentHash = Hash.GetHashBytesAsString(genesisStudentBytes);
                 string[] genesissaltAndSaltHashArray = Hash.GetRandomSaltWithHash();
 
                 string genesissalt = genesissaltAndSaltHashArray[0];
@@ -86,9 +90,11 @@ namespace ReceiveJsonSaveToCosmosFunction
                 lastRecord = await dbConnector.GetLastAddedStudentRecordByStudentId();
             }
 
-            byte[] studentToAddBytes = ObjectHasher.GetBytes(studentToAdd);
+            //byte[] studentToAddBytes = ObjectHasher.GetBytes(studentToAdd);
 
-            string studentToAddHash = Hash.GetHashBytesAsString(studentToAddBytes);
+            //string studentToAddHash = Hash.GetHashBytesAsString(studentToAddBytes);
+            string studentToAddSerialized = JsonConvert.SerializeObject(studentToAdd);
+            string studentToAddHash = Hash.GetHashString(studentToAddSerialized);
 
             string[] saltAndSaltHashArray = Hash.GetRandomSaltWithHash();
 

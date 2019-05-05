@@ -22,7 +22,6 @@ namespace StudentRecordTool
 
         private static readonly HttpClient client = new HttpClient();
 
-
         public ViewRecordForm(string file, string title, bool isAddForm)
         {
             InitializeComponent();

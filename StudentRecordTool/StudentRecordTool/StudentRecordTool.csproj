@@ -118,10 +118,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hash.cs" />
     <Compile Include="Models\BasicStudent.cs" />
     <Compile Include="Models\FullStudent.cs" />
+    <Compile Include="ObjectHasher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudentMapper.cs" />
     <Compile Include="UtilityFunctions.cs" />
     <Compile Include="VerifyRecordsForm.cs">
       <SubType>Form</SubType>

@@ -5,7 +5,7 @@ TODO:
         - ~~If zero, then its genesis block and create the initial hash for genesis block~~
     - ~~Create method to get the last student record added~~
     - ~~Map basic student object to full student object~~
-    - ~~Create method which will hash the basic student object (maybe the Json object string format) ~~
+    - ~~Create method which will hash the basic student object (maybe the Json object string format)~~
     - ~~Hashing will use an established algorithm such as SHA-512 or the newer SHA3 algorithm rather than hand rolling my own~~
 - ~~Create the initial function which will take the submitted name from the client side and call the function which will retrieve the user record and respond back with the object containing the basic student info~~
 - ~~**Extra Work** generate a pdf server side and send back a base64 encoded string which can be used client side to download the pdf~~

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ReceiveJsonSaveToCosmosFunction;
 using StudentRecordTool.Models;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,8 @@ namespace StudentRecordTool
             schoolDivision.Text = "College of Eng/ Comp Sci";
             degree.Text = "Bachelor of Science";
             major.Text = "Computer Science";
+            dateOfBirthPicker.Value = StudentMapper.UnixEpoch;
+            dateAwarded.Value = StudentMapper.UnixEpoch;
         }
 
         private void CreateRecordForm_FormClosed(object sender, FormClosedEventArgs e)
