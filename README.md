@@ -13,6 +13,6 @@ TODO:
 - ~~Create the end user website and host it~~
     - ~~Display received pdf~~
 - Write unit tests
-- Finish the debug student tool used to test the flow/ something administration might use
-  - Add ability to generate records, view records, add records, delete records, verify records
+- ~~Finish the debug student tool used to test the flow/ something administration might use~~
+  - ~~Add ability to generate records, view records, add records, verify records~~
 - Deploy to live Azure resources

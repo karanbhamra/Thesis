@@ -40,7 +40,9 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             var failureMessageToReturn = new HttpResponseMessage(HttpStatusCode.NotFound);
 
-            CosmosConnector dbConnector = new CosmosConnector("https://localhost:8081", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
+            var url = Environment.GetEnvironmentVariable("cosmosUrl");
+            var accessKey = Environment.GetEnvironmentVariable("cosmosAccesskey");
+            CosmosConnector dbConnector = new CosmosConnector(url, accessKey);
 
             HttpStatusCode databaseCreatedSuccessfulyStatusCode = await dbConnector.CreateDataBase("StudentDatabase");
 
@@ -67,9 +69,7 @@ namespace ReceiveJsonSaveToCosmosFunction
                 string genesisStudentSerialized = JsonConvert.SerializeObject(genesisStudent);
                 string genesisStudentHash = Hash.GetHashString(genesisStudentSerialized);
 
-                //byte[] genesisStudentBytes = ObjectHasher.GetBytes(genesisStudent);
 
-                //string genesisStudentHash = Hash.GetHashBytesAsString(genesisStudentBytes);
                 string[] genesissaltAndSaltHashArray = Hash.GetRandomSaltWithHash();
 
                 string genesissalt = genesissaltAndSaltHashArray[0];
@@ -90,9 +90,6 @@ namespace ReceiveJsonSaveToCosmosFunction
                 lastRecord = await dbConnector.GetLastAddedStudentRecordByStudentId();
             }
 
-            //byte[] studentToAddBytes = ObjectHasher.GetBytes(studentToAdd);
-
-            //string studentToAddHash = Hash.GetHashBytesAsString(studentToAddBytes);
             string studentToAddSerialized = JsonConvert.SerializeObject(studentToAdd);
             string studentToAddHash = Hash.GetHashString(studentToAddSerialized);
 
@@ -114,15 +111,18 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             HttpStatusCode recordInsertedStatusCode = dbConnector.InsertStudentRecord(fullStudent);
 
+            if (recordInsertedStatusCode == HttpStatusCode.Created)
+            {
+                return successMessageToReturn;
+            }
+            else
+            {
+                return failureMessageToReturn;
+            }
 
-
-            //var studentRecords = await dbConnector.GetStudentRecords();
-
-            //int totalStudents = await dbConnector.GetStudentRecordCount();
-
-            return studentToAdd != null
-                ? successMessageToReturn
-                : failureMessageToReturn;
+            //return studentToAdd != null
+            //    ? successMessageToReturn
+            //    : failureMessageToReturn;
         }
     }
 }

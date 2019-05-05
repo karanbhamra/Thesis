@@ -117,9 +117,6 @@ namespace ReceiveJsonSaveToCosmosFunction
             });
 
             return await getRecords;
-
-            // int count = await getRecordCount;
-            // return count;
         }
 
         public async Task<int> GetStudentRecordCount()
@@ -133,25 +130,13 @@ namespace ReceiveJsonSaveToCosmosFunction
 
         }
 
-        //public async Task<dynamic> GetFullStudentRecordFromName(Student student)
-        //{
-        //    string query = $"SELECT * FROM c where c.FirstName='{student.FirstName}' and c.MiddleName='{student.MiddleName}' and c.LastName='{student.LastName}'";
-
-        //    Task<dynamic> studentRecord = Task<dynamic>.Factory.StartNew(() =>
-        //    {
-        //        var list = client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query).ToList();
-        //        return list[0];
-        //    });
-
-        //    return await studentRecord;
-        //}
-
         public dynamic GetFullStudentRecordFromName(BasicStudent student)
         {
             string query = $"SELECT * FROM c where c.FirstName='{student.FirstName}' and c.MiddleName='{student.MiddleName}' and c.LastName='{student.LastName}'";
 
-            dynamic document = client.CreateDocumentQuery<dynamic>(UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName),
-    query).AsEnumerable().FirstOrDefault();
+            dynamic document = client.CreateDocumentQuery<dynamic>(
+                UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query
+            ).AsEnumerable().FirstOrDefault();
 
             return document;
         }

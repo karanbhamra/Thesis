@@ -11,6 +11,8 @@ using ReceiveJsonSaveToCosmosFunction;
 using Newtonsoft.Json;
 using StudentRecordTool.Models;
 using SHA512HashGenerator;
+using UtilityFunctions;
+
 
 namespace StudentRecordTool
 {
@@ -38,6 +40,14 @@ namespace StudentRecordTool
             // now that we have the fullstudent records, we can start the verfication of them all
             BasicStudent genesisStudent = StudentMapper.GenesisStudentNode();
 
+
+            // start at the end of the records and then recalculate the hash of the node and check if it matches with the one on record
+            // then recalculate the hash of the previous node and check to see if it matches with the currents previous on record
+            // if both are valid, then the record is considered to be valid
+            // otherwise, the record is invalid
+
+
+            // Print some debug info alongside
             bool valid = true;
             for (int i = students.Count -1 ; i >= 0; i--)
             {
@@ -67,7 +77,6 @@ namespace StudentRecordTool
                 }
                 else
                 {
-
                     FullStudent previousFullStudent = students[i - 1];
                     Console.WriteLine($"Previous Student: {previousFullStudent.FirstName}");
                     string recalculatedPreviousNodeHash = CalculateCurrentFullStudentHash(previousFullStudent);
@@ -96,7 +105,15 @@ namespace StudentRecordTool
             }
             else
             {
-                MessageBox.Show($"Hash mismatch on {student1} and {student2}", "Error");
+                if (student2.Length == 0)
+                {
+                    MessageBox.Show($"Hash mismatch on {student1}", "Error");
+
+                }
+                else
+                {
+                    MessageBox.Show($"Hash mismatch on {student1} and {student2}", "Error");
+                }
 
             }
 
@@ -120,7 +137,11 @@ namespace StudentRecordTool
 
         private async Task<List<FullStudent>> GetAllFullStudents()
         {
-            CosmosConnector dbConnector = new CosmosConnector("https://localhost:8081", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
+            //CosmosConnector dbConnector = new CosmosConnector("https://localhost:8081", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
+
+            var url = UtilityFunctions.UtilityFunctions.GetValueOfSetting("cosmosUrl");
+            var accessKey = UtilityFunctions.UtilityFunctions.GetValueOfSetting("cosmosAccessKey");
+            CosmosConnector dbConnector = new CosmosConnector(url, accessKey);
             dbConnector.PreviousDatabaseName = "StudentDatabase";
             dbConnector.PreviousTableName = "StudentRecords";
             var records = await dbConnector.GetStudentRecords();

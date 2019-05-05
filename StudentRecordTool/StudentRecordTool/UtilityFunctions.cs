@@ -9,6 +9,8 @@ namespace UtilityFunctions
     {
         public string devUrl { get; set; }
         public string liveUrl { get; set; }
+        public string cosmosUrl { get; set; }
+        public string cosmosAccessKey { get; set; }
     }
 
     static class UtilityFunctions
@@ -65,6 +67,14 @@ namespace UtilityFunctions
                 else if (setting == "devUrl")
                 {
                     return settings.devUrl;
+                }
+                else if (setting == "cosmosUrl")
+                {
+                    return settings.cosmosUrl;
+                }
+                else if (setting == "cosmosAccessKey")
+                {
+                    return settings.cosmosAccessKey;
                 }
                 else
                 {

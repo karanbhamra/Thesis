@@ -63,6 +63,7 @@ namespace StudentRecordTool
                 Major = major.Text
             };
 
+
             // serialize JSON directly to a file
 
             string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

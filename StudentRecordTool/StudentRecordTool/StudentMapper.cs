@@ -55,7 +55,7 @@ namespace ReceiveJsonSaveToCosmosFunction
             BasicStudent basicStudent = new BasicStudent
             {
                 FirstName = "Matty",
-                MiddleName = "the",
+                MiddleName = "The",
                 LastName = "Matador",
                 DateOfBirth = UnixEpoch,//DateTime.UnixEpoch,
                 Organization = "California State University - Northridge",

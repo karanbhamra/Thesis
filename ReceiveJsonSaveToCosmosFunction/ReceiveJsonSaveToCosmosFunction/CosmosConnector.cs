@@ -7,10 +7,11 @@ using StudentRecordTool.Models;
 using System.Threading.Tasks;
 using System.Net;
 using System.Linq;
+using ReceiveJsonSaveToCosmosFunction;
 
 namespace ReceiveJsonSaveToCosmosFunction
 {
-    class CosmosConnector
+    class CosmosConnector : IDisposable
     {
         public string Uri { get; set; }
         public string AccessKey { get; set; }
@@ -46,6 +47,16 @@ namespace ReceiveJsonSaveToCosmosFunction
             var statusCode = collectionResult.StatusCode;
 
             return statusCode;
+        }
+
+        internal void UseTableName(string tablename)
+        {
+            PreviousTableName = tablename;
+        }
+
+        internal void UseDataBase(string databasename)
+        {
+            PreviousDatabaseName = databasename;
         }
 
         public HttpStatusCode InsertStudentRecord(BasicStudent student)
@@ -106,14 +117,11 @@ namespace ReceiveJsonSaveToCosmosFunction
             });
 
             return await getRecords;
-
-           // int count = await getRecordCount;
-           // return count;
         }
 
         public async Task<int> GetStudentRecordCount()
         {
-            var records =  await GetStudentRecords();
+            var records = await GetStudentRecords();
 
             int count = records.Count;
 
@@ -122,6 +130,23 @@ namespace ReceiveJsonSaveToCosmosFunction
 
         }
 
+        public dynamic GetFullStudentRecordFromName(BasicStudent student)
+        {
+            string query = $"SELECT * FROM c where c.FirstName='{student.FirstName}' and c.MiddleName='{student.MiddleName}' and c.LastName='{student.LastName}'";
 
+            dynamic document = client.CreateDocumentQuery<dynamic>(
+                UriFactory.CreateDocumentCollectionUri(PreviousDatabaseName, PreviousTableName), query
+            ).AsEnumerable().FirstOrDefault();
+
+            return document;
+        }
+
+        public void Dispose()
+        {
+            if (client != null)
+            {
+                client.Dispose();
+            }
+        }
     }
 }

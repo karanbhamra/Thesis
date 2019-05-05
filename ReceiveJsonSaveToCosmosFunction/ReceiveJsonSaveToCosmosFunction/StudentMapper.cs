@@ -7,6 +7,7 @@ namespace ReceiveJsonSaveToCosmosFunction
 {
     class StudentMapper
     {
+        // This variable is needed because Azure Functions use .NetCore 2.1+ and DateTime.UnixEpoch is not backported to .NetFramework
         public static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         public static FullStudent Map(BasicStudent basicStudent, string prevRecordHash, string currentNodeHash, string salt, int id = 1)
@@ -28,15 +29,25 @@ namespace ReceiveJsonSaveToCosmosFunction
                 Salt = salt
             };
 
-
-
-
-            // set id,
-            // set previous recordhash
-            // set currentnodehash
-
-
             return fullStudent;
+        }
+
+        public static BasicStudent FullStudentToBasicStudent(FullStudent fullStudent)
+        {
+            BasicStudent basicStudent = new BasicStudent()
+            {
+                FirstName = fullStudent.FirstName,
+                MiddleName = fullStudent.MiddleName,
+                LastName = fullStudent.LastName,
+                DateOfBirth = fullStudent.DateOfBirth,
+                Organization = fullStudent.Organization,
+                SchoolDivision = fullStudent.SchoolDivision,
+                Degree = fullStudent.Degree,
+                Awarded = fullStudent.Awarded,
+                Major = fullStudent.Major
+            };
+
+            return basicStudent;
         }
 
         public static BasicStudent GenesisStudentNode()
@@ -44,7 +55,7 @@ namespace ReceiveJsonSaveToCosmosFunction
             BasicStudent basicStudent = new BasicStudent
             {
                 FirstName = "Matty",
-                MiddleName = "the",
+                MiddleName = "The",
                 LastName = "Matador",
                 DateOfBirth = UnixEpoch,//DateTime.UnixEpoch,
                 Organization = "California State University - Northridge",

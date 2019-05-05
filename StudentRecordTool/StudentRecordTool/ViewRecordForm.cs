@@ -65,7 +65,7 @@ namespace StudentRecordTool
                     string json = JsonConvert.SerializeObject(basicStudent);
                     streamWriter.Write(json);
                 }
-
+                httpWebRequest.Timeout = int.MaxValue;
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
                 if (httpResponse.StatusCode == HttpStatusCode.Created)
