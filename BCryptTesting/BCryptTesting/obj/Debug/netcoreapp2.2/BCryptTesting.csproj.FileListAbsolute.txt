@@ -1,0 +1,11 @@
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/bin/Debug/netcoreapp2.2/BCryptTesting.deps.json
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/bin/Debug/netcoreapp2.2/BCryptTesting.runtimeconfig.json
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/bin/Debug/netcoreapp2.2/BCryptTesting.runtimeconfig.dev.json
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/bin/Debug/netcoreapp2.2/BCryptTesting.dll
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/bin/Debug/netcoreapp2.2/BCryptTesting.pdb
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/obj/Debug/netcoreapp2.2/BCryptTesting.csprojAssemblyReference.cache
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/obj/Debug/netcoreapp2.2/BCryptTesting.csproj.CoreCompileInputs.cache
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/obj/Debug/netcoreapp2.2/BCryptTesting.AssemblyInfoInputs.cache
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/obj/Debug/netcoreapp2.2/BCryptTesting.AssemblyInfo.cs
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/obj/Debug/netcoreapp2.2/BCryptTesting.dll
+/home/karan/RiderProjects/BCryptTesting/BCryptTesting/obj/Debug/netcoreapp2.2/BCryptTesting.pdb
