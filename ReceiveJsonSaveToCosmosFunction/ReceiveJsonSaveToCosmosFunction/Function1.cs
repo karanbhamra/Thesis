@@ -13,7 +13,6 @@ using System.Net;
 using System.Text;
 using SHA512HashGenerator;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace ReceiveJsonSaveToCosmosFunction
 {
@@ -119,10 +118,6 @@ namespace ReceiveJsonSaveToCosmosFunction
             {
                 return failureMessageToReturn;
             }
-
-            //return studentToAdd != null
-            //    ? successMessageToReturn
-            //    : failureMessageToReturn;
         }
     }
 }

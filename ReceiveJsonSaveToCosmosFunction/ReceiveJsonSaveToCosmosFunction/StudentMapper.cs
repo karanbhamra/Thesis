@@ -26,7 +26,7 @@ namespace ReceiveJsonSaveToCosmosFunction
                 RecordId = id,
                 PreviousRecordHash = prevRecordHash,
                 CurrentNodeHash = currentNodeHash,
-                Salt = salt
+                Salt = salt,
             };
 
             return fullStudent;
@@ -57,11 +57,11 @@ namespace ReceiveJsonSaveToCosmosFunction
                 FirstName = "Matty",
                 MiddleName = "The",
                 LastName = "Matador",
-                DateOfBirth = UnixEpoch,//DateTime.UnixEpoch,
+                DateOfBirth = UnixEpoch,
                 Organization = "California State University - Northridge",
                 SchoolDivision = "College of Eng/ Comp Sci",
                 Degree = "Master of Science",
-                Awarded = UnixEpoch,//DateTime.UnixEpoch,
+                Awarded = UnixEpoch,
                 Major = "Computer Science",
             };
 
