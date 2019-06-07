@@ -67,5 +67,29 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             return basicStudent;
         }
+
+        public static FullStudent DictionaryObjectToFullStudent(IDictionary<string, object> dict)
+        {
+            FullStudent fullStudent = new FullStudent()
+            {
+                FirstName = dict["FirstName"] as string,
+                MiddleName = dict["MiddleName"] as string,
+                LastName = dict["LastName"] as string,
+                DateOfBirth = (DateTime)dict["DateOfBirth"],
+                Organization = dict["Organization"] as string,
+                SchoolDivision = dict["SchoolDivision"] as string,
+                Degree = dict["Degree"] as string,
+                Awarded = (DateTime)dict["Awarded"],
+                Major = dict["Major"] as string,
+                PreviousRecordHash = dict["PreviousRecordHash"] as string,
+                CurrentNodeHash = dict["CurrentNodeHash"] as string,
+                Salt = dict["Salt"] as string,
+                IsValid = Convert.ToBoolean(dict["IsValid"]),
+                PreviousFullRecordHash = dict["PreviousFullRecordHash"] as string
+
+            };
+
+            return fullStudent;
+        }
     }
 }

@@ -41,7 +41,7 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             var url = Environment.GetEnvironmentVariable("cosmosUrl");
             var accessKey = Environment.GetEnvironmentVariable("cosmosAccesskey");
-            CosmosConnector dbConnector = new CosmosConnector(url, accessKey);
+            IDatabaseConnector dbConnector = new CosmosConnector(url, accessKey);
 
             HttpStatusCode databaseCreatedSuccessfulyStatusCode = await dbConnector.CreateDataBase("StudentDatabase");
 
@@ -50,35 +50,15 @@ namespace ReceiveJsonSaveToCosmosFunction
             // last record holds the last inserted record
             var lastRecord = await dbConnector.GetLastAddedStudentRecordByStudentId();
 
-            FullStudent fullStudent;
+            FullStudent fullStudentToAdd = null;
 
             bool addingForFirstTime = false;
 
             // if no record was retrieved (empty database, insert genesis block)
             if (lastRecord.Count == 0)
             {
-                // no record returned, add the genesis block
-                // generate previous node hash for genesis student
-                // generate genesis student hash, and salthash and combined hash
 
-                BasicStudent genesisStudent = StudentMapper.GenesisStudentNode();
-
-                string hashForGenesisStudentPrevious = Hash.GetHashString("Test");
-
-                string genesisStudentSerialized = JsonConvert.SerializeObject(genesisStudent);
-                string genesisStudentHash = Hash.GetHashString(genesisStudentSerialized);
-
-
-                string[] genesissaltAndSaltHashArray = Hash.GetRandomSaltWithHash();
-
-                string genesissalt = genesissaltAndSaltHashArray[0];
-                string genesissaltHash = genesissaltAndSaltHashArray[1];
-
-                string genesisstudentHashPlusSaltHash = Hash.GetHashString(genesisStudentHash + genesissaltHash);
-
-                fullStudent = StudentMapper.Map(genesisStudent, hashForGenesisStudentPrevious, genesisstudentHashPlusSaltHash, genesissalt);
-
-                HttpStatusCode genesisrecordInsertedStatusCode = dbConnector.InsertStudentRecord(fullStudent);
+                InsertGenesisStudent(fullStudentToAdd, dbConnector);
 
                 addingForFirstTime = true;
 
@@ -86,6 +66,7 @@ namespace ReceiveJsonSaveToCosmosFunction
 
             if (addingForFirstTime)
             {
+                // If we are adding for the first time, lets get the record of the last student added from the database
                 lastRecord = await dbConnector.GetLastAddedStudentRecordByStudentId();
             }
 
@@ -106,9 +87,26 @@ namespace ReceiveJsonSaveToCosmosFunction
             string previousRecordHash = dict["CurrentNodeHash"] as string;
             int previousRecordId = Convert.ToInt32(dict["RecordId"]);
 
-            fullStudent = StudentMapper.Map(studentToAdd, previousRecordHash, studentHashPlusSaltHash, salt, previousRecordId + 1);
+            fullStudentToAdd = StudentMapper.Map(studentToAdd, previousRecordHash, studentHashPlusSaltHash, salt, previousRecordId + 1);
 
-            HttpStatusCode recordInsertedStatusCode = dbConnector.InsertStudentRecord(fullStudent);
+
+            //string previousstudentfullhash = dict["PreviousFullRecordHash"] as string;
+
+            // calculate out the full record hash of the previous full student
+
+            FullStudent previousFullStudent = StudentMapper.DictionaryObjectToFullStudent(dict);
+
+
+            string previousFullStudentSerialized = JsonConvert.SerializeObject(previousFullStudent);
+
+            Console.WriteLine(previousFullStudentSerialized);
+
+            string previousFullBCryptHash = Hash.GetHashString(previousFullStudentSerialized);//Hash.GetBCryptHashAutoSalt(previousFullStudentSerialized);
+
+            // save the full hash of the previous student
+            fullStudentToAdd.PreviousFullRecordHash = previousFullBCryptHash;
+
+            HttpStatusCode recordInsertedStatusCode = dbConnector.InsertStudentRecord(fullStudentToAdd);
 
             if (recordInsertedStatusCode == HttpStatusCode.Created)
             {
@@ -118,6 +116,40 @@ namespace ReceiveJsonSaveToCosmosFunction
             {
                 return failureMessageToReturn;
             }
+        }
+
+        private static void InsertGenesisStudent(FullStudent fullStudent, IDatabaseConnector dbConnector)
+        {
+            // no record returned, add the genesis block
+            // generate previous node hash for genesis student
+            // generate genesis student hash, and salthash and combined hash
+
+            BasicStudent genesisStudent = StudentMapper.GenesisStudentNode();
+
+            // SHA512 hash of 512 for the previous for genesisStudent
+            string hashForGenesisStudentPrevious = Hash.GetHashString("Test");// Hash.GetBCryptHashAutoSalt("Test");
+
+            string genesisStudentSerialized = JsonConvert.SerializeObject(genesisStudent);
+            string genesisStudentHash = Hash.GetHashString(genesisStudentSerialized);
+
+            Console.WriteLine($"Genesis studnet");
+            Console.WriteLine(genesisStudentSerialized);
+
+            string[] genesissaltAndSaltHashArray = Hash.GetRandomSaltWithHash();
+
+            string genesissalt = genesissaltAndSaltHashArray[0];
+            string genesissaltHash = genesissaltAndSaltHashArray[1];
+
+            string genesisstudentHashPlusSaltHash = Hash.GetHashString(genesisStudentHash + genesissaltHash);
+
+            fullStudent = StudentMapper.Map(genesisStudent, hashForGenesisStudentPrevious, genesisstudentHashPlusSaltHash, genesissalt);
+
+            // add the full hash of the previous student
+
+            fullStudent.PreviousFullRecordHash = hashForGenesisStudentPrevious;
+
+            HttpStatusCode genesisrecordInsertedStatusCode = dbConnector.InsertStudentRecord(fullStudent);
+
         }
     }
 }

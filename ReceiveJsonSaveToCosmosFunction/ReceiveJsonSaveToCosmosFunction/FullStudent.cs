@@ -32,5 +32,13 @@ namespace ReceiveJsonSaveToCosmosFunction
 
         public string Salt { get; set; }    // salt will be hashed and then added to current nodehash
 
+
+        // Since the records are immutable, we will mark the invalid property as false if there is a hash mismatch
+        public bool IsValid { get; set; } = true;
+
+
+        // hold the full previous record hash, for additional verification
+        public string PreviousFullRecordHash { get; set; }
+
     }
 }

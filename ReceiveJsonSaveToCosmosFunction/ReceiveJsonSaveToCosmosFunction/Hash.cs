@@ -13,6 +13,10 @@ namespace SHA512HashGenerator
             return BCrypt.Net.BCrypt.GenerateSalt(workFactor);
         }
 
+        public static string GetBCryptHashAutoSalt(string input)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(input);
+        }
         public static string GetBCryptHash(string input, string salt)
         {
             return BCrypt.Net.BCrypt.HashPassword(input, salt);
