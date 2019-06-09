@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=3.1.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.3.1.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.Documents.Client, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.DocumentDB.2.4.0\lib\net461\Microsoft.Azure.Documents.Client.dll</HintPath>
     </Reference>
@@ -118,7 +121,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GetRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetRecordForm.Designer.cs">
+      <DependentUpon>GetRecordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Hash.cs" />
+    <Compile Include="HashUtilityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HashUtilityForm.Designer.cs">
+      <DependentUpon>HashUtilityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IDatabaseConnector.cs" />
     <Compile Include="Models\BasicStudent.cs" />
     <Compile Include="Models\FullStudent.cs" />
     <Compile Include="ObjectHasher.cs" />
@@ -143,6 +159,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetRecordForm.resx">
+      <DependentUpon>GetRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HashUtilityForm.resx">
+      <DependentUpon>HashUtilityForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

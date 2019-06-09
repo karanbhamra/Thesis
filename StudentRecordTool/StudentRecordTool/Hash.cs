@@ -2,20 +2,41 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
+using BCrypt.Net;
 namespace SHA512HashGenerator
 {
     public static class Hash
     {
+
+        public static string GetBCryptSalt(int workFactor = 11)
+        {
+            return BCrypt.Net.BCrypt.GenerateSalt(workFactor);
+        }
+
+        public static string GetBCryptHashAutoSalt(string input, int workFactor = 11)
+        {
+            string salt = GetBCryptSalt(workFactor);
+            return BCrypt.Net.BCrypt.HashPassword(input, salt);
+        }
+        public static string GetBCryptHash(string input, string salt)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(input, salt);
+        }
+
+        public static bool VerifyBCryptHash(string text, string hash)
+        {
+            return BCrypt.Net.BCrypt.Verify(text, hash);
+        }
+
         private static byte[] GetHashBytes(byte[] input)
         {
             using (var generator = new SHA512Managed())
             {
                 return generator.ComputeHash(input);
             }
-
         }
 
-        public static string GetHashBytesAsString(byte[] input)
+        public static string GetHashBytesAsString(byte[] input, bool useBCrypt = false)
         {
             using (var generator = new SHA512Managed())
             {
@@ -49,19 +70,14 @@ namespace SHA512HashGenerator
         private static string GetRandomSaltAsString()
         {
             string result = Guid.NewGuid().ToString();
-
             return result;
-
         }
 
         private static string GetSaltHashedAsString(string randomSalt)
         {
-            //string randomSalt = GetRandomSaltAsString();
             byte[] randomSaltBytes = GetBytesFromString(randomSalt);
 
             string result = GetHashString(randomSalt);
-
-            //string result = GetHashBytesAsString(randomSaltBytes);
 
             return result;
         }

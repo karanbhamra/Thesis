@@ -29,3 +29,7 @@
 \\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Numerics.Vectors.xml
 \\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 \\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.VerifyRecordsForm.resources
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.GetRecordForm.resources
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\BCrypt.Net-Next.dll
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\bin\Debug\BCrypt.Net-Next.xml
+\\Mac\Home\Desktop\Thesis\StudentRecordTool\StudentRecordTool\obj\Debug\StudentRecordTool.HashUtilityForm.resources

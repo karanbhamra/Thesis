@@ -65,5 +65,18 @@ namespace StudentRecordTool
                 viewRecordForm.Show();
             }
         }
+
+        private void getRecord_Click(object sender, EventArgs e)
+        {
+            GetRecordForm form = new GetRecordForm();
+
+            form.Show();
+        }
+
+        private void hashUtility_Click(object sender, EventArgs e)
+        {
+            HashUtilityForm form = new HashUtilityForm();
+            form.Show();
+        }
     }
 }

@@ -11,7 +11,7 @@ using ReceiveJsonSaveToCosmosFunction;
 
 namespace ReceiveJsonSaveToCosmosFunction
 {
-    class CosmosConnector : IDisposable
+    class CosmosConnector : IDisposable, IDatabaseConnector
     {
         public string Uri { get; set; }
         public string AccessKey { get; set; }
