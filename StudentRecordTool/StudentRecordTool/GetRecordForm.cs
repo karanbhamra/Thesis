@@ -30,16 +30,23 @@ namespace StudentRecordTool
             List<FullStudent> students = await GetAllFullStudents();
 
             Func<FullStudent, bool> predicate = x => x.FirstName == firstName.Text && x.LastName == lastName.Text && x.MiddleName == middleName.Text;
-            FullStudent fullStudent = students.First(predicate);
 
-            if (fullStudent != null)
+            try
             {
-                string fullStudentJSON = JsonConvert.SerializeObject(fullStudent);
-                BasicStudent basicStudent = StudentMapper.FullStudentToBasicStudent(fullStudent);
-                string basicStudentJSON = JsonConvert.SerializeObject(basicStudent);
+                FullStudent fullStudent = students.First(predicate);
 
-                basicStudentTextBox.Text = basicStudentJSON;
-                fullStudentTextBox.Text = fullStudentJSON;
+                if (fullStudent != null)
+                {
+                    string fullStudentJSON = JsonConvert.SerializeObject(fullStudent);
+                    BasicStudent basicStudent = StudentMapper.FullStudentToBasicStudent(fullStudent);
+                    string basicStudentJSON = JsonConvert.SerializeObject(basicStudent);
+
+                    basicStudentTextBox.Text = basicStudentJSON;
+                    fullStudentTextBox.Text = fullStudentJSON;
+                }
+            } catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
             }
 
         }

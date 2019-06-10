@@ -53,6 +53,7 @@ namespace StudentRecordTool
             {
                 bool currentHashMatch = true;
                 bool previousHashMatch = true;
+                bool previousFullHashMatch = true;
 
                 FullStudent currentFullStudent = students[i];
 
@@ -74,6 +75,10 @@ namespace StudentRecordTool
                         previousHashMatch = false;
                     }
 
+                    if (previousGenesisHash != currentFullStudent.PreviousFullRecordHash)
+                    {
+                        previousFullHashMatch = false;
+                    }
                 }
                 else
                 {
@@ -86,9 +91,17 @@ namespace StudentRecordTool
                         previousHashMatch = false;
                         student2 = previousFullStudent.FirstName;
                     }
+                    // new
+                    string previousFullHashObject = JsonConvert.SerializeObject(previousFullStudent);
+                    string previousFullHash = Hash.GetHashString(previousFullHashObject);
+
+                    if (previousFullHash != currentFullStudent.PreviousFullRecordHash)
+                    {
+                        previousFullHashMatch = false;
+                    }
                 }
 
-                if (!currentHashMatch || !previousHashMatch)
+                if (!currentHashMatch || !previousHashMatch || !previousFullHashMatch)    // also check the fullnodehashmatch
                 {
                     valid = false;
                     student1 = currentFullStudent.FirstName;
@@ -152,22 +165,24 @@ namespace StudentRecordTool
             {
                 var dict = (IDictionary<string, object>)record;
 
-                FullStudent fullStudent = new FullStudent()
-                {
-                    FirstName = dict["FirstName"] as string,
-                    MiddleName = dict["MiddleName"] as string,
-                    LastName = dict["LastName"] as string,
-                    DateOfBirth = (DateTime)dict["DateOfBirth"],
-                    Organization = dict["Organization"] as string,
-                    SchoolDivision = dict["SchoolDivision"] as string,
-                    Degree = dict["Degree"] as string,
-                    Awarded = (DateTime)dict["Awarded"],
-                    Major = dict["Major"] as string,
-                    PreviousRecordHash = dict["PreviousRecordHash"] as string,
-                    CurrentNodeHash = dict["CurrentNodeHash"] as string,
-                    Salt = dict["Salt"] as string,
-                    RecordId = Convert.ToInt32(dict["RecordId"])
-                };
+                FullStudent fullStudent = StudentMapper.DictionaryObjectToFullStudent(dict);
+
+                //FullStudent fullStudent = new FullStudent()
+                //{
+                //    FirstName = dict["FirstName"] as string,
+                //    MiddleName = dict["MiddleName"] as string,
+                //    LastName = dict["LastName"] as string,
+                //    DateOfBirth = (DateTime)dict["DateOfBirth"],
+                //    Organization = dict["Organization"] as string,
+                //    SchoolDivision = dict["SchoolDivision"] as string,
+                //    Degree = dict["Degree"] as string,
+                //    Awarded = (DateTime)dict["Awarded"],
+                //    Major = dict["Major"] as string,
+                //    PreviousRecordHash = dict["PreviousRecordHash"] as string,
+                //    CurrentNodeHash = dict["CurrentNodeHash"] as string,
+                //    Salt = dict["Salt"] as string,
+                //    RecordId = Convert.ToInt32(dict["RecordId"])
+                //};
 
                 fullStudents.Add(fullStudent);
             }
